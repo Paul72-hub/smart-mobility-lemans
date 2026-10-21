@@ -22,8 +22,18 @@ Pour pandas, le nombre 1001 et le texte "1001" sont deux valeurs différentes : 
 Le pire, c'est que l'erreur est silencieuse. Pas de plantage, mais des lignes perdues ou des valeurs vides après le merge, et des résultats faux sans qu'on s'en rende compte. Selon les cas, pandas peut aussi lever une erreur.
 La solution du script : lire tous les fichiers avec dtype=str (ligne 210 du manuel), pour que tous les identifiants soient du texte
 partout et que la jointure fonctionne.
-## Reflection 3 — Per-route vs. per-stop logging volume
 
+ **Reflection 3.** Before reading further: roughly how many individual stop-time
+> update rows would a 12-week semester of 15-minute snapshots produce, if you logged
+> every one of them? (Order of magnitude is the point, not exact math.) Now compare
+> that to logging one row **per route** per snapshot instead (there are only 27-40
+> routes). What real analytical question — something a transport planner might
+> actually ask — becomes harder to answer with the per-route version? Keep your
+> answer; you'll need it again in the final section.
+
+Le calcul, version par arrêt : on compte 4 relevés par heure × 24 h × 7 jours × 12 semaines ≈ 8 000 relevés. À environ 5 000 lignes par relevé, cela fait environ 40 millions de lignes, beaucoup trop pour un fichier suivi par Git.
+Le calcul, version par ligne de bus : 8 000 relevés × environ 30 lignes ≈ 240 000 lignes, soit à peu près 150 fois moins, ce qui reste gérable.
+Ce qu'on perd : on ne sait plus à quel arrêt ou sur quel tronçon le retard apparaît. On sait seulement que la ligne 5 est en retard en moyenne, pas que le retard se forme à tel carrefour ou dans tel quartier. Un planificateur ne peut donc pas savoir où intervenir précisément (couloir de bus, feu prioritaire…).
 
 ## Reflection 4 — Alternative color encoding for delays
 
