@@ -73,7 +73,16 @@ analyse:
 11h45 n'est pas une heure de pointe, donc le trafic seul explique mal ce retard ;
 56 arrêts sautés, c'est le signe typique d'une déviation (travaux, voie fermée) : le bus contourne une partie de son trajet ;
 
-## Reflection 7 — When population misleads as a demand proxy
+> **Reflection 7.** Before writing any code: you're about to use commune
+> **population** as a stand-in for real transport **demand**, because real ridership
+> data doesn't exist as open data. Name one concrete, realistic way a commune could
+> have *low* population but genuinely *high* transport demand (or the reverse) — so
+> you go into this exercise already knowing the proxy's failure mode, not just its
+> formula.
+
+Peu d'habitants mais beaucoup de demande : une commune qui accueille une grande zone d'emplois, une zone commerciale, un hôpital ou une université. Des milliers de personnes y viennent chaque jour sans y habiter. Exemples au Mans : le circuit des 24 Heures (Mulsanne / Arnage) pendant les courses, ou une zone d'activités.
+Beaucoup d'habitants mais moins de demande : une commune résidentielle aisée où presque tout le monde a une voiture, ou une population âgée qui se déplace peu aux heures de pointe.
+La conséquence : la population mesure où les gens dorment, pas où ils vont. Le ratio offre/population va donc sous-estimer les besoins des zones d'emploi et d'événements.
 
 
 ## Reflection 8 — Supply metric and a commune where it misleads

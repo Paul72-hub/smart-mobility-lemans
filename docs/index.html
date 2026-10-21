@@ -14,6 +14,12 @@
   #alerts.none { border-color: #2c9c4a; background: #f0f8f2; }
   canvas { margin-top: 2rem; }
   #updated { color: #666; font-size: 0.85rem; }
+  .table-wrap { overflow-x: auto; }
+  #supplyTable { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  #supplyTable th, #supplyTable td { padding: 0.35rem 0.6rem; border-bottom: 1px solid #ddd; text-align: right; }
+  #supplyTable th:first-child, #supplyTable td:first-child { text-align: left; }
+  #supplyTable td.flag { color: #c46e0a; font-weight: bold; }
+  .note { color: #666; font-size: 0.85rem; }
 </style>
 </head>
 <body>
@@ -23,6 +29,35 @@
   <div id="alerts">Loading alerts...</div>
   <canvas id="delayChart" height="320"></canvas>
   <p id="updated"></p>
+
+  <h2>Transport supply vs. population, by commune</h2>
+  <p class="note">Scheduled weekday stop-visits per 1,000 residents. Population is a proxy for
+     demand, not real ridership. Each stop is assigned to the commune whose centre is
+     nearest, not to the commune it actually lies in.</p>
+  <div class="table-wrap"><table id="supplyTable"><tr><td>Loading...</td></tr></table></div>
+
+<script>
+fetch('data/commune_supply.json')
+  .then(r => r.json())
+  .then(data => {
+    const rows = data.communes.map((c, i) => `
+      <tr>
+        <td>${i + 1}. ${c.commune}</td>
+        <td>${c.population.toLocaleString('en')}</td>
+        <td>${c.n_stops}</td>
+        <td>${c.daily_stop_visits.toLocaleString('en')}</td>
+        <td>${c.visits_per_1000_residents}</td>
+        <td class="${c.top_stop_share >= 0.4 ? 'flag' : ''}">${Math.round(c.top_stop_share * 100)}%</td>
+      </tr>`).join('');
+    document.getElementById('supplyTable').innerHTML =
+      '<tr><th>Commune</th><th>Population</th><th>Stops</th><th>Stop-visits/day</th>' +
+      '<th>Per 1,000 residents</th><th>Busiest stop share</th></tr>' + rows;
+  })
+  .catch(() => {
+    document.getElementById('supplyTable').innerHTML =
+      '<tr><td>No supply data yet -- run the "Build static reference" workflow.</td></tr>';
+  });
+</script>
 
 <script>
 fetch('data/current_state.json')

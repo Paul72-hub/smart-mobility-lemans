@@ -1,4 +1,4 @@
-import csv, io, math, os, zipfile
+import csv, io, json, math, os, zipfile
 import requests
 import pandas as pd
 
@@ -34,6 +34,29 @@ def nearest_commune(lat, lon, communes):
         if best_dist is None or d < best_dist:
             best_dist, best_name = d, c["commune"]
     return best_name
+
+def build_commune_supply(freq, communes_df):
+    """Supply vs. demand proxy: scheduled weekday stop-visits per 1,000 residents.
+    Computed here, monthly, because both inputs (schedule and population) change
+    no faster than that."""
+    agg = freq.groupby("nearest_commune").agg(
+        n_stops=("stop_id", "count"),
+        daily_stop_visits=("daily_trip_count", "sum"),
+        busiest_stop_visits=("daily_trip_count", "max"),
+    ).reset_index()
+    # Left join from communes so a commune with no stop at all still shows up (with 0).
+    supply = communes_df.merge(agg, left_on="commune", right_on="nearest_commune", how="left")
+    supply = supply.drop(columns=["nearest_commune", "lat", "lon"])
+    supply[["n_stops", "daily_stop_visits", "busiest_stop_visits"]] = (
+        supply[["n_stops", "daily_stop_visits", "busiest_stop_visits"]].fillna(0).astype(int)
+    )
+    supply["visits_per_1000_residents"] = (supply["daily_stop_visits"] / supply["population"] * 1000).round(1)
+    # Share of the commune's visits coming from its single busiest stop: a high value
+    # means one stop (an interchange, a terminus) drives the whole score.
+    supply["top_stop_share"] = (
+        supply["busiest_stop_visits"] / supply["daily_stop_visits"].where(supply["daily_stop_visits"] > 0)
+    ).round(2).fillna(0)
+    return supply.sort_values("visits_per_1000_residents", ascending=False)
 
 def main():
     communes_df = pd.read_csv("data/reference/communes.csv")
@@ -90,6 +113,18 @@ def main():
     print(f"Wrote data/gtfs_static/routes.csv ({len(routes)} rows)")
     print("Top 5 busiest stops:")
     print(freq[["stop_name", "daily_trip_count", "nearest_commune"]].head(5).to_string(index=False))
+
+    supply = build_commune_supply(freq, communes_df)
+    supply.to_csv("data/gtfs_static/commune_supply.csv", index=False)
+    os.makedirs("docs/data", exist_ok=True)
+    with open("docs/data/commune_supply.json", "w") as f:
+        json.dump({
+            "service_id": service_id,
+            "metric": "Scheduled weekday stop-visits per 1,000 residents",
+            "communes": supply.to_dict("records"),
+        }, f, indent=2)
+    print(f"Wrote data/gtfs_static/commune_supply.csv and docs/data/commune_supply.json ({len(supply)} communes)")
+    print(supply[["commune", "population", "n_stops", "visits_per_1000_residents"]].to_string(index=False))
 
 if __name__ == "__main__":
     main()
