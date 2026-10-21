@@ -85,10 +85,41 @@ Beaucoup d'habitants mais moins de demande : une commune résidentielle aisée o
 La conséquence : la population mesure où les gens dorment, pas où ils vont. Le ratio offre/population va donc sous-estimer les besoins des zones d'emploi et d'événements.
 
 
-## Reflection 8 — Supply metric and a commune where it misleads
+> **Reflection 8.** State your chosen supply metric in one sentence. Then, using
+> your own actual output (not a hypothetical), name one commune where the ranking
+> looks wrong to you, and explain why — using what you actually know about that
+> commune, not just the formula.
 
+L'indicateur en une phrase : « le nombre de passages de bus/tram prévus par jour de semaine dans les arrêts d'une commune, pour 1 000 habitants ».
+La commune où le classement est faux : Le Mans, seulement 10ᵉ avec 154 passages pour 1 000 habitants, derrière La Chapelle-Saint-Aubin (1ʳᵉ, 1 010) et Coulaines (2ᵉ, 762). C'est absurde : Le Mans concentre les 3 lignes de tram et les plus gros pôles (Gares, Mairie).
+Pourquoi : chaque arrêt est rattaché à la commune dont le centre est le plus proche, pas à la commune où il se trouve réellement. Le Mans est très étendue mais n'est représentée que par un seul point, son centre-ville. Les arrêts des quartiers périphériques du Mans sont donc plus proches du centre de La Chapelle-Saint-Aubin ou de Coulaines, et leur sont attribués à tort. Résultat : ces petites communes « volent » des arrêts au Mans (53 arrêts pour 2 300 habitants à La Chapelle, par exemple), ce qui gonfle leur score et fait baisser celui du Mans.
 
-## Reflection 9 — Aggregating stop-level delay events
+> **Reflection 9.** Go back to Reflection 4's answer about per-route vs. per-stop
+> logging. If you wanted "which *stops* are affected by repeated delays" answered
+> from real-time data (not the static schedule), you'd hit that same data-volume
+> problem again. You don't have to build this — but describe, in a few sentences, one
+> concrete approach you'd take to aggregate stop-level events so a semester of
+> 15-minute snapshots stays a reasonably-sized, git-tracked file.
 
+Le principe : ne pas stocker chaque relevé brut, mais des compteurs agrégés par arrêt et par créneau.
+L'approche : un fichier avec une ligne par arrêt × tranche horaire × jour de la semaine, par exemple « arrêt Gares, mardi, 8h-9h ». À chaque relevé, on met à jour les compteurs de cette ligne au lieu d'en ajouter une nouvelle :
+le nombre d'observations ;
+le nombre de fois où le retard a dépassé 2 minutes ;
+la somme des retards (pour recalculer la moyenne) et le retard maximum.
+La taille : environ 1 800 arrêts × 7 jours × environ 18 heures de service ≈ 230 000 lignes au maximum, et ce chiffre ne grossit plus avec le temps, contre 40 millions en brut.
+Le compromis : on perd le détail de chaque bus et la date exacte. Mais on peut toujours répondre à la question « quels arrêts sont souvent en retard, et à quelle heure ? ». Variante possible : ne garder que les événements de retard au-delà d'un seuil, par exemple plus de 3 minutes, au lieu de tout.
 
-## Reflection 10 — Closing: predictions vs. what I found
+> **Reflection 10 (closing).** Return to Reflection 1. Which of the business
+> question's sub-questions turned out to be answerable today, which needed real
+> judgment calls from you, and which genuinely need weeks of accumulated history
+> before they're answerable at all? Compare this to what you originally guessed.
+
+Ce qu'on peut faire dès aujourd'hui : savoir où se trouve l'offre (arrêts les plus desservis : Gares, Mairie) et voir les retards du moment (ligne 5).
+Ce qui a demandé des choix de votre part :
+utiliser la population comme approximation de la demande ;
+choisir l'indicateur (passages pour 1 000 habitants) ;
+rattacher les arrêts au centre de commune le plus proche, ce qui a faussé le classement du Mans ;
+choisir les couleurs du graphique (avance ou retard) ;
+décider d'agréger par ligne plutôt que par arrêt.
+Ce qui demande des semaines d'historique : savoir quand intervenir (retards récurrents aux heures de pointe, certains jours) et prévoir les retards. Avec un ou deux relevés, c'est impossible.
+La comparaison avec la réflexion 1 : votre hypothèse sur la fréquence des pipelines était juste. En revanche, ajoutez la partie « facile ou difficile » qui manquait à votre réflexion 1, et dites ce qui vous a surpris. Par exemple : le classement par commune semblait facile, mais il s'est révélé trompeur à cause du rattachement des arrêts.
