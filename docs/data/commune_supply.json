@@ -1,0 +1,186 @@
+{
+  "service_id": "B-PS-2627A-HB-SE-PS-L-Ma-J-V-04",
+  "metric": "Scheduled weekday stop-visits per 1,000 residents",
+  "communes": [
+    {
+      "commune": "La-Chapelle-Saint-Aubin",
+      "population": 2319,
+      "n_stops": 53,
+      "daily_stop_visits": 2343,
+      "busiest_stop_visits": 82,
+      "visits_per_1000_residents": 1010.3,
+      "top_stop_share": 0.03
+    },
+    {
+      "commune": "Coulaines",
+      "population": 8226,
+      "n_stops": 105,
+      "daily_stop_visits": 6267,
+      "busiest_stop_visits": 111,
+      "visits_per_1000_residents": 761.9,
+      "top_stop_share": 0.02
+    },
+    {
+      "commune": "Rouillon",
+      "population": 2666,
+      "n_stops": 41,
+      "daily_stop_visits": 1906,
+      "busiest_stop_visits": 188,
+      "visits_per_1000_residents": 714.9,
+      "top_stop_share": 0.1
+    },
+    {
+      "commune": "Allonnes",
+      "population": 10846,
+      "n_stops": 69,
+      "daily_stop_visits": 4017,
+      "busiest_stop_visits": 160,
+      "visits_per_1000_residents": 370.4,
+      "top_stop_share": 0.04
+    },
+    {
+      "commune": "Arnage",
+      "population": 5548,
+      "n_stops": 34,
+      "daily_stop_visits": 1638,
+      "busiest_stop_visits": 193,
+      "visits_per_1000_residents": 295.2,
+      "top_stop_share": 0.12
+    },
+    {
+      "commune": "Yvre-l-Eveque",
+      "population": 4269,
+      "n_stops": 22,
+      "daily_stop_visits": 750,
+      "busiest_stop_visits": 51,
+      "visits_per_1000_residents": 175.7,
+      "top_stop_share": 0.07
+    },
+    {
+      "commune": "Saint-Saturnin",
+      "population": 2864,
+      "n_stops": 21,
+      "daily_stop_visits": 490,
+      "busiest_stop_visits": 57,
+      "visits_per_1000_residents": 171.1,
+      "top_stop_share": 0.12
+    },
+    {
+      "commune": "La-Milesse",
+      "population": 2650,
+      "n_stops": 15,
+      "daily_stop_visits": 425,
+      "busiest_stop_visits": 86,
+      "visits_per_1000_residents": 160.4,
+      "top_stop_share": 0.2
+    },
+    {
+      "commune": "Sarge-les-le-Mans",
+      "population": 3941,
+      "n_stops": 15,
+      "daily_stop_visits": 630,
+      "busiest_stop_visits": 42,
+      "visits_per_1000_residents": 159.9,
+      "top_stop_share": 0.07
+    },
+    {
+      "commune": "Le Mans",
+      "population": 148876,
+      "n_stops": 329,
+      "daily_stop_visits": 22900,
+      "busiest_stop_visits": 250,
+      "visits_per_1000_residents": 153.8,
+      "top_stop_share": 0.01
+    },
+    {
+      "commune": "Ruaudin",
+      "population": 3542,
+      "n_stops": 22,
+      "daily_stop_visits": 536,
+      "busiest_stop_visits": 53,
+      "visits_per_1000_residents": 151.3,
+      "top_stop_share": 0.1
+    },
+    {
+      "commune": "Champagne",
+      "population": 3728,
+      "n_stops": 19,
+      "daily_stop_visits": 425,
+      "busiest_stop_visits": 26,
+      "visits_per_1000_residents": 114.0,
+      "top_stop_share": 0.06
+    },
+    {
+      "commune": "Mulsanne",
+      "population": 5352,
+      "n_stops": 18,
+      "daily_stop_visits": 525,
+      "busiest_stop_visits": 42,
+      "visits_per_1000_residents": 98.1,
+      "top_stop_share": 0.08
+    },
+    {
+      "commune": "Aigne",
+      "population": 1724,
+      "n_stops": 6,
+      "daily_stop_visits": 138,
+      "busiest_stop_visits": 23,
+      "visits_per_1000_residents": 80.0,
+      "top_stop_share": 0.17
+    },
+    {
+      "commune": "Pruille-le-Chetif",
+      "population": 1357,
+      "n_stops": 8,
+      "daily_stop_visits": 88,
+      "busiest_stop_visits": 11,
+      "visits_per_1000_residents": 64.8,
+      "top_stop_share": 0.12
+    },
+    {
+      "commune": "Fay",
+      "population": 770,
+      "n_stops": 3,
+      "daily_stop_visits": 44,
+      "busiest_stop_visits": 22,
+      "visits_per_1000_residents": 57.1,
+      "top_stop_share": 0.5
+    },
+    {
+      "commune": "Trange",
+      "population": 1678,
+      "n_stops": 6,
+      "daily_stop_visits": 87,
+      "busiest_stop_visits": 15,
+      "visits_per_1000_residents": 51.8,
+      "top_stop_share": 0.17
+    },
+    {
+      "commune": "Chaufour-Notre-Dame",
+      "population": 1187,
+      "n_stops": 3,
+      "daily_stop_visits": 58,
+      "busiest_stop_visits": 29,
+      "visits_per_1000_residents": 48.9,
+      "top_stop_share": 0.5
+    },
+    {
+      "commune": "Saint-Georges-du-Bois",
+      "population": 2308,
+      "n_stops": 7,
+      "daily_stop_visits": 96,
+      "busiest_stop_visits": 24,
+      "visits_per_1000_residents": 41.6,
+      "top_stop_share": 0.25
+    },
+    {
+      "commune": "Fatines",
+      "population": 937,
+      "n_stops": 2,
+      "daily_stop_visits": 38,
+      "busiest_stop_visits": 25,
+      "visits_per_1000_residents": 40.6,
+      "top_stop_share": 0.66
+    }
+  ]
+}
