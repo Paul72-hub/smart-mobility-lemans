@@ -115,11 +115,11 @@ Le compromis : on perd le détail de chaque bus et la date exacte. Mais on peut 
 > before they're answerable at all? Compare this to what you originally guessed.
 
 Ce qu'on peut faire dès aujourd'hui : savoir où se trouve l'offre (arrêts les plus desservis : Gares, Mairie) et voir les retards du moment (ligne 5).
-Ce qui a demandé des choix de votre part :
+Ce qui a demandé des choix de ma part :
 utiliser la population comme approximation de la demande ;
 choisir l'indicateur (passages pour 1 000 habitants) ;
 rattacher les arrêts au centre de commune le plus proche, ce qui a faussé le classement du Mans ;
 choisir les couleurs du graphique (avance ou retard) ;
 décider d'agréger par ligne plutôt que par arrêt.
 Ce qui demande des semaines d'historique : savoir quand intervenir (retards récurrents aux heures de pointe, certains jours) et prévoir les retards. Avec un ou deux relevés, c'est impossible.
-La comparaison avec la réflexion 1 : votre hypothèse sur la fréquence des pipelines était juste. En revanche, ajoutez la partie « facile ou difficile » qui manquait à votre réflexion 1, et dites ce qui vous a surpris. Par exemple : le classement par commune semblait facile, mais il s'est révélé trompeur à cause du rattachement des arrêts.
+La comparaison avec la réflexion 1 : notre hypothèse sur la fréquence des pipelines était juste. En revanche, certains classements semblaient facile à réaliser alors qu'en réalité ils ne l'étaient pas: exemple, le classement par commune semblait facile, mais il s'est révélé trompeur à cause du rattachement des arrêts.
